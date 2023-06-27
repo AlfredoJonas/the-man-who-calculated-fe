@@ -6,7 +6,7 @@ export interface Record {
   user_balance: number;
   operation_response: string;
   created_at: string;
-  [key: string]: any; // Add an index signature to allow accessing properties using string indexes
+  [key: string]: any; // Add an key signature to allow accessing properties using string indexes
 }
 
 export interface paginatedApiUserRecordsProps {
