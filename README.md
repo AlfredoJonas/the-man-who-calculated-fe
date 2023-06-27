@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://truenorthinc.com/wp-content/themes/truenorth2019/images/nav-logo-black.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Arithmetic Calculator Web page</h3>
@@ -92,7 +92,7 @@ _You can follow this steps in order to have an app build and up._
    ```
 2. Move on the root dir of your project
     ```sh
-    cd the-man-who-calculated-be
+    cd the-man-who-calculated-fe
     ```
 3. Do a copy of the *env.example* file renaming it as *.env*
    ```sh
