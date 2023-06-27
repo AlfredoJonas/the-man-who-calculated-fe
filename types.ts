@@ -16,3 +16,8 @@ export interface paginatedApiUserRecordsProps {
   filter: string;
   order: string;
 }
+
+export interface paginatedApiUserLoginProps {
+  username: string;
+  password: string;
+}

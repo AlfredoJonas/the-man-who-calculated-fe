@@ -36,9 +36,10 @@ const StyledButton = styled(Button)`
 interface NavbarProps {
     email: string;
     userBalance: number;
+    onSignOut: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ email, userBalance }) => {
+const Navbar: React.FC<NavbarProps> = ({ email, userBalance, onSignOut }) => {
   return (
     <NavbarContainer>
       <NavbarItem position="left">
@@ -53,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ email, userBalance }) => {
         </Button>
       </NavbarItem>
       <NavbarItem position="right">
-        <StyledButton color="red" size="tiny">
+        <StyledButton onClick={onSignOut} color="red" size="tiny">
           Sign Out
         </StyledButton>
       </NavbarItem>

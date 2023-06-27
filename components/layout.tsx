@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router';
 import Navbar from './navbar'
 import styled from 'styled-components'
+import { useDeleteUserRecord, useUserInfo, useUserLogout } from '../hooks/queryHooks'
 
 const StyledContainer = styled('div')`
   & {
@@ -31,6 +32,9 @@ export default function Layout({
 }: {
   children: React.ReactNode
 }) {
+  const {data: { data = {} } = {}} = useUserInfo()
+  const {mutate: logout} = useUserLogout()
+  const {username, user_balance: userBalance} = data
   
   const router = useRouter();
 
@@ -48,7 +52,7 @@ export default function Layout({
           <meta name="og:title" content={siteTitle} />
         </Head>
         <StyledHeader>
-          <Navbar email="email@admin.com" userBalance={54}/>
+          <Navbar email={username} userBalance={userBalance} onSignOut={logout} />
         </StyledHeader>
         <StyledMain>{children}</StyledMain>
       </StyledContainer>
