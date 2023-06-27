@@ -9,7 +9,7 @@ export interface Record {
   [key: string]: any; // Add an index signature to allow accessing properties using string indexes
 }
 
-export interface paginatedApiProps {
+export interface paginatedApiUserRecordsProps {
   page: number;
   size: number;
   search: string;

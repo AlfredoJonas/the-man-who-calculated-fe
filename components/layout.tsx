@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 import Navbar from './navbar'
 import styled from 'styled-components'
 
@@ -30,6 +31,16 @@ export default function Layout({
 }: {
   children: React.ReactNode
 }) {
+  
+  const router = useRouter();
+
+  if (typeof localStorage !== 'undefined') {
+    const loggedIn = localStorage.getItem('logged_in');
+    if (loggedIn === '0') {
+      router.push('/login');
+    }
+  }
+
   return (
       <StyledContainer>
         <Head>
@@ -37,7 +48,7 @@ export default function Layout({
           <meta name="og:title" content={siteTitle} />
         </Head>
         <StyledHeader>
-          <Navbar email='alfredojonas94@gmail.com' onSignOut={()=>{}} />
+          <Navbar email="email@admin.com" userBalance={54}/>
         </StyledHeader>
         <StyledMain>{children}</StyledMain>
       </StyledContainer>

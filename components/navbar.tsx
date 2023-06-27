@@ -10,6 +10,8 @@ const NavbarContainer = styled(Menu)`
     border-radius: 0;
     margin-bottom: 0;
     padding: 0.5rem 1rem;
+
+    
   }
 `;
 
@@ -19,27 +21,41 @@ const NavbarItem = styled(Menu.Item)`
   }
 `;
 
-const EmailText = styled.span`
+const LeftItemText = styled.span`
   color: #333;
   font-weight: bold;
   margin-right: 1rem;
 `;
 
+const StyledButton = styled(Button)`
+  &&&&& {
+    font-size: .85714286rem;
+  }
+`
+
 interface NavbarProps {
     email: string;
-    onSignOut: () => void;
+    userBalance: number;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ email, onSignOut }) => {
+const Navbar: React.FC<NavbarProps> = ({ email, userBalance }) => {
   return (
     <NavbarContainer>
       <NavbarItem position="left">
-        <EmailText>{email}</EmailText>
+        <LeftItemText>{email}</LeftItemText>
+      </NavbarItem>
+      <NavbarItem position="left">
+        <LeftItemText>Balance {userBalance}</LeftItemText>
       </NavbarItem>
       <NavbarItem position="right">
-        <Button onClick={onSignOut} color="red">
-          Sign Out
+        <Button onClick={()=>{}} color="green">
+          New operation
         </Button>
+      </NavbarItem>
+      <NavbarItem position="right">
+        <StyledButton color="red" size="tiny">
+          Sign Out
+        </StyledButton>
       </NavbarItem>
     </NavbarContainer>
   );

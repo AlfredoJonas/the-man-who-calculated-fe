@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Input, PaginationProps } from 'semantic-ui-react';
 import RecordList from '../components/recordList';
 import Layout from '../components/layout';
-import { useUserRecordsInfo } from '../hooks';
+import { useDeleteUserRecord, useUserRecordsInfo } from '../hooks/queryHooks';
 
 const StyledSearch = styled(Input)`
   &&& {
@@ -17,8 +17,10 @@ const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [orderBy, setOrderBy] = useState<string[]>([]);
-  const { data, refetch } = useUserRecordsInfo(
-    {page: currentPage,
+  const {mutate: mutateDeleteUserRecord} = useDeleteUserRecord()
+  const { data = {}, refetch } = useUserRecordsInfo(
+    {
+      page: currentPage,
       size: 10,
       search,
       filter: '',
@@ -26,7 +28,7 @@ const Home: React.FC = () => {
     }
     );
   const {
-    data: records,
+    data: records = [],
     total_pages: totalPages = 1
   } = data;
   
@@ -76,6 +78,7 @@ const Home: React.FC = () => {
         handleSearchChange={handleSearchChange}
         handleOrderChange={handleOrderChange}
         onPageChange={handlePageChange}
+        onDeleteRecord={mutateDeleteUserRecord}
       />
     </Layout>
   );

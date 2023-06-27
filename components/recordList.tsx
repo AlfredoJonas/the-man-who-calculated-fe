@@ -43,6 +43,7 @@ interface RecordListProps {
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleOrderChange: (filter: string) => void;
   onPageChange: (event: React.MouseEvent, data: PaginationProps) => void;
+  onDeleteRecord: (id: number) => void;
 }
 
 const RecordList: React.FC<RecordListProps> = memo(({
@@ -53,6 +54,7 @@ const RecordList: React.FC<RecordListProps> = memo(({
   handleSearchChange,
   handleOrderChange,
   onPageChange,
+  onDeleteRecord,
 }) => {
   const checkorderIcon = (key: string): SemanticICONS | undefined => {
     if (orderBy.includes(key)) {
@@ -92,7 +94,7 @@ const RecordList: React.FC<RecordListProps> = memo(({
                   <Table.Cell key={`${record.id}-${key}`}>{record[key]}</Table.Cell>
                 ))
               }
-              <Table.Cell><StyledIcon name="trash" color='red'/></Table.Cell>
+              <Table.Cell><StyledIcon name="trash" color='red' onClick={() => onDeleteRecord(record.id)}/></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
