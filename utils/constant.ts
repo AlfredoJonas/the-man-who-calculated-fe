@@ -1,9 +1,5 @@
-import getConfig from 'next/config';
-
-const { APP_BASE_URL: ABU } = getConfig();
-
-export const APP_BASE_URL = ABU;
-
+const apiBaseUrl = process.env.NEXT_PUBLIC_APP_BASE_URL;
+export const APP_BASE_URL = `${apiBaseUrl}/api`;
 
 export const recordKeyValues = [
     {

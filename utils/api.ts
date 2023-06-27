@@ -1,21 +1,20 @@
 import axios from 'axios';
 import { APP_BASE_URL } from './constant';
 
-const authToken = 'bqf0eb-03b50a4238f19f6d877d69a1f205b5df';
+const token = ''
 
 const headers = {
   'Content-Type': 'application/json',
-  Authorization: `Bearer ${authToken}`,
+  'Authentication': `Bearer ${token}`
 };
 
-
 export const FETCH_URL = {
-    user_records: 'records',
+  user_records: 'records',
+  delete_user_record: 'record/delete'
 }
 
 export const api = axios.create({
-    baseURL: "http://localhost:8000/api/",
-    timeout: 30000,
-    headers,
+  baseURL: APP_BASE_URL,
+  timeout: 30000,
+  headers,
 });
-
