@@ -1,8 +1,9 @@
+import React from 'react'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Navbar from './navbar';
 import styled from 'styled-components';
-import { useDeleteUserRecord, useUserInfo, useUserLogout } from '../hooks/queryHooks';
+import { useUserInfo, useUserLogout } from '../hooks/queryHooks';
 
 /**
  * Props for the Layout component.
@@ -42,7 +43,7 @@ const Layout = ({ children }: LayoutProps): React.ReactNode => {
         <meta name="og:title" content={siteTitle} />
       </Head>
       <StyledHeader>
-        <Navbar email={username} userBalance={userBalance} onSignOut={logout} />
+        <Navbar email={username} userBalance={userBalance} path={router.asPath} push={(url) => router.push(url)} onSignOut={logout} />
       </StyledHeader>
       <StyledMain>{children}</StyledMain>
     </StyledContainer>

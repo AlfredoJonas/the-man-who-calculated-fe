@@ -10,7 +10,9 @@ export const FETCH_URL = {
   user_logout: 'logout',
   user_records: 'records',
   user_info: 'user',
-  delete_user_record: 'record/delete'
+  delete_user_record: 'record/delete',
+  operations: 'operations',
+  new_operation: 'record'
 }
 
 export const api = axios.create({

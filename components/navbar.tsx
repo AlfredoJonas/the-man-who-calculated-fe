@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Menu, Button } from 'semantic-ui-react';
+import { Router } from 'next/router';
 
 
 /**
@@ -9,7 +10,9 @@ import { Menu, Button } from 'semantic-ui-react';
 interface NavbarProps {
   email: string;
   userBalance: number;
+  path: string;
   onSignOut: () => void;
+  push: (url: string) => void;
 }
 
 /**
@@ -18,19 +21,28 @@ interface NavbarProps {
  * @param {NavbarProps} props - The component props.
  * @returns {JSX.Element} - The rendered component.
  */
-const Navbar: React.FC<NavbarProps> = ({ email, userBalance, onSignOut }) => {
+const Navbar: React.FC<NavbarProps> = ({ email, userBalance, path, onSignOut, push }) => {
   return (
     <NavbarContainer>
-      <NavbarItem position="left">
+      <NavbarItem position="left" onClick={() => push('/')}>
         <LeftItemText>{email}</LeftItemText>
       </NavbarItem>
       <NavbarItem position="left">
         <LeftItemText>Balance {userBalance}</LeftItemText>
       </NavbarItem>
       <NavbarItem position="right">
-        <Button onClick={() => {}} color="green">
-          New operation
-        </Button>
+        {
+          path === '/newOperation' ? (
+            <StyledButton onClick={() => push('/')} color="black">
+              Back to all operations
+            </StyledButton>
+          ) : (
+          <Button onClick={() => push('newOperation')} color="green">
+            New operation
+          </Button>
+          )
+        }
+        
       </NavbarItem>
       <NavbarItem position="right">
         <StyledButton onClick={onSignOut} color="red" size="tiny">
@@ -62,6 +74,7 @@ const NavbarContainer = styled(Menu)`
 const NavbarItem = styled(Menu.Item)`
   &&& {
     padding: 0;
+    cursor: pointer;
   }
 `;
 

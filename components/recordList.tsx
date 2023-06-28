@@ -1,14 +1,14 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Table, Pagination, PaginationProps, Icon, SemanticICONS } from 'semantic-ui-react';
-import { Record } from '../types';
+import { UserRecord } from '../types';
 import { recordKeyValues } from '../utils/constant';
 
 /**
  * Props for the RecordList component.
  */
 interface RecordListProps {
-  records: Record[];
+  records: UserRecord[];
   orderBy: string[];
   currentPage: number;
   totalPages: number;
@@ -69,7 +69,7 @@ const RecordList: React.FC<RecordListProps> = memo(({
       <Table.Body>
         {records &&
           records.length > 0 &&
-          records.map((record: Record) => (
+          records.map((record: UserRecord) => (
             <Table.Row key={record.id}>
               {recordKeyValues.map(({ key }) => (
                 <Table.Cell key={`${record.id}-${key}`}>{record[key]}</Table.Cell>

@@ -1,7 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { FETCH_URL, api } from '../utils/api';
-import { paginatedApiUserRecordsProps, paginatedApiUserLoginProps } from '../types';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
+import { FETCH_URL, api } from '../utils/api';
+import { ResponseType } from '../types';
+import { paginatedApiUserRecordsProps, paginatedApiUserLoginProps, newOperationProps } from '../types';
 
 /**
  * Custom hook for fetching user records information.
@@ -75,6 +77,10 @@ export const useUserLogout = (options = {}) => {
         localStorage.setItem('logged_in', '0');
         router.push('/login');
       },
+      onError: () => {
+        localStorage.setItem('logged_in', '0');
+        router.push('/login');
+      },
       ...options,
     }
   );
@@ -95,7 +101,7 @@ export const useUserInfo = (options = {}) => {
       return data;
     },
     {
-      placeholderData: queryClient.getQueryData(`user`) || {},
+      placeholderData: queryClient.getQueryData('user') || {},
       ...options,
     }
   );
@@ -140,6 +146,59 @@ export const useDeleteUserRecord = (options = {}) => {
       },
       onSettled: () => {
         queryClient.invalidateQueries('records');
+      },
+      ...options,
+    }
+  );
+};
+
+/**
+ * Custom hook for fetching operations information.
+ *
+ * @param {object} options - The query options.
+ * @returns {object} - The query result.
+ */
+export const useOperationsInfo = (options = {}) => {
+  const queryClient = useQueryClient();
+  return useQuery(
+    'operations',
+    async () => {
+      const { data } = await api.get(FETCH_URL.operations);
+      return data;
+    },
+    {
+      placeholderData: queryClient.getQueryData('operations') || {},
+      ...options,
+    }
+  );
+};
+
+
+/**
+ * Custom hook for new user operation.
+ *
+ * @param {object} options - The mutation options.
+ * @returns {object} - The mutation result.
+ */
+export const useNewOperation = (setResponse: (response: ResponseType | null)=>void, setError: (error: AxiosError | null)=>void, options = {}) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    'newOperation',
+    async (params: newOperationProps) => {
+      const {
+        data: { data },
+      } = await api.post(FETCH_URL.new_operation, params);
+      return data;
+    },
+    {
+      onSuccess: (data: any) => {
+        setResponse(data);
+        queryClient.invalidateQueries('user');
+        setError(null);
+      },
+      onError: (e) => {
+        setResponse(null);
+        setError(e as AxiosError);
       },
       ...options,
     }
