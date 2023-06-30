@@ -1,0 +1,111 @@
+import React from 'react';
+import { render, fireEvent, waitFor, getByPlaceholderText } from '@testing-library/react';
+import { useUserLogin } from '../hooks/queryHooks';
+import { paginatedApiUserLoginProps } from '../types';
+import Login from '../pages/login';
+
+const mockDoLogin = jest.fn();
+
+// Mock the useUserLogin hook if needed
+jest.mock('../hooks/queryHooks', () => ({
+  useUserLogin: () => ({
+    mutate: mockDoLogin,
+  }),
+}));
+
+// Mock the localStorage.getItem method
+const mockGetItem = jest.fn();
+const mockSetItem = jest.fn();
+const mockRemoveItem = jest.fn();
+const mockClear = jest.fn();
+const mockLength = 0;
+const mockKey = jest.fn();
+
+
+Object.defineProperty(window, 'localStorage', {
+  value: {
+    getItem: mockGetItem,
+    setItem: mockSetItem,
+    removeItem: mockRemoveItem,
+    clear: mockClear,
+    length: mockLength,
+    key: mockKey,
+  },
+  writable: true,
+});
+
+// Mock the router
+const mockPush = jest.fn();
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}));
+
+describe('Login', () => {
+  
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  // Test that the login form is displayed
+  test('test_login_form_displayed', () => {
+    // Arrange
+    const { getByPlaceholderText, getByText } = render(<Login />);
+
+    // Assert
+    const usernameInput = getByPlaceholderText('Enter your username');
+    const passwordInput = getByPlaceholderText('Enter your password');
+    const loginButton = getByText('Login');
+
+    expect(usernameInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+    expect(loginButton).toBeInTheDocument();
+  });
+
+  // Test that form submission triggers doLogin function
+  test('test_form_submission_triggers_doLogin', async () => {
+    // Arrange
+    const { getByPlaceholderText, getByText } = render(<Login />);
+
+    // Assert
+    const usernameInput = getByPlaceholderText('Enter your username');
+    const passwordInput = getByPlaceholderText('Enter your password');
+    const loginButton = getByText('Login');
+
+    fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+    fireEvent.click(loginButton);
+
+    // Assert
+    await waitFor(() => expect(mockDoLogin).toHaveBeenCalledTimes(1));
+    expect(mockDoLogin).toHaveBeenCalledWith({
+      username: 'testuser',
+      password: 'testpassword',
+    } as paginatedApiUserLoginProps);
+  });
+
+  // Test that the form redirects to the home page if the user is already logged in
+  test('test_redirect_to_home_if_logged_in', () => {
+    // Arrange
+    mockGetItem.mockReturnValue('1'); // User is already logged in
+
+    // Act
+    render(<Login />);
+
+    // Assert
+    expect(mockPush).toHaveBeenCalledWith('/');
+  });
+
+  // Test that the form does not redirect if the user is not logged in
+  test('test_no_redirect_if_not_logged_in', () => {
+    // Arrange
+    mockGetItem.mockReturnValue('0'); // User is not logged in
+
+    // Act
+    render(<Login />);
+
+    // Assert
+    expect(mockPush).not.toHaveBeenCalled();
+  });
+});
