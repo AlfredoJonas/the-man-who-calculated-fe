@@ -14,12 +14,13 @@
     <a href="https://github.com/AlfredoJonas/the-man-who-calculated-be/blob/main/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="http://the-man-who-calculated-fe-dev.us-east-1.elasticbeanstalk.com/">View Demo</a>
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
   </p>
+  <p><span><b>Username: </b>manager@truenorth.com</span>  <span><b>Password: </b>admin</span></p>
 </div>
 
 
