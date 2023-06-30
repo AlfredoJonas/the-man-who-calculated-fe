@@ -33,7 +33,10 @@ const Layout: React.FC<LayoutProps> = ({ children }): JSX.Element => {
     const loggedIn = localStorage.getItem('logged_in');
     if (loggedIn === '0') {
       router.push('/login');
+      return <StyledContainer>Loading...</StyledContainer>
     }
+  } else {
+    return <StyledContainer>Loading...</StyledContainer>
   }
 
   return (

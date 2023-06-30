@@ -7,9 +7,9 @@ const withAuthRedirect = <P extends object>(Component: ComponentType<P>): Compon
     if (typeof localStorage !== 'undefined') {
       const loggedIn = localStorage.getItem('logged_in');
       if (loggedIn === '1') {
-        console.log('Auth hook');
         router.push('/');
-        return null;
+      } else {
+        router.push('/login');
       }
     }
     return <Component {...props} />;
