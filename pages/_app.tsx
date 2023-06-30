@@ -1,6 +1,21 @@
 import { AppProps } from 'next/app'
 import ReactQueryProvider from './api/react-query';
-import StyledComponentsRegistry from '../lib/registry';
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`
+
+const theme = {
+  colors: {
+    primary: '#0070f3',
+  },
+}
+
 import 'semantic-ui-css/semantic.min.css'
 import '../styles/global.css'
 
@@ -8,9 +23,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ReactQueryProvider>
-      <StyledComponentsRegistry>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
         <Component {...pageProps} />
-      </StyledComponentsRegistry>
+      </ThemeProvider>
     </ReactQueryProvider>
   );
 }
