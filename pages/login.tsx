@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
 import { Form, Button } from 'semantic-ui-react';
 import { useUserLogin } from '../hooks/queryHooks';
+import withAuthRedirect from '../hooks/auth';
 
 /**
  * The Login page component.
  *
  * @returns {JSX.Element} - The Login component.
  */
-const Login: React.FC = () : JSX.Element => {
+const Login = (): JSX.Element => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { mutate: doLogin } = useUserLogin();
-  const router = useRouter();
-
-  // Redirect to the home page if the user is already logged in
-  if (typeof localStorage !== 'undefined') {
-    const loggedIn = localStorage.getItem('logged_in');
-    if (loggedIn === '1') {
-      router.push('/');
-    }
-  }
 
   /**
    * Event handler for the login form submission.
@@ -75,10 +66,10 @@ const LoginForm = styled(Form)`
   border-radius: 4px;
 `;
 
-const LoginButton = styled(Button)`
+export const LoginButton = styled(Button)`
   &&& {
     margin-top: 20px;
   }
 `;
 
-export default Login;
+export default withAuthRedirect(Login);

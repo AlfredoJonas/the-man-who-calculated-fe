@@ -50,6 +50,7 @@ export const useUserLogin = (options = {}) => {
       onSuccess: (data: any) => {
         api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
         localStorage.setItem('logged_in', '1');
+        console.log('Logged in');
         router.push('/');
       },
       ...options,
