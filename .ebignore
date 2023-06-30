@@ -1,0 +1,11 @@
+# dependencies
+node_modules/
+# repository/project stuff
+.vscode/
+.git/
+README.md
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# local env files
+.env
