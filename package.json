@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next build && next start -p $PORT",
+    "start": "npm i && next build && next start -p $PORT",
     "test": "jest --watch --runInBand"
   },
   "dependencies": {
