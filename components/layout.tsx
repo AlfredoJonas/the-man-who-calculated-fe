@@ -19,9 +19,9 @@ const siteTitle = 'True North Home Task Challenge';
  * Layout component for the application.
  * 
  * @param {LayoutProps} props - The component props.
- * @returns {React.ReactNode} - The rendered component.
+ * @returns {JSX.Element} - The rendered component.
  */
-const Layout = ({ children }: LayoutProps): React.ReactNode => {
+const Layout: React.FC<LayoutProps> = ({ children }): JSX.Element => {
   const { data: { data = {} } = {} } = useUserInfo();
   const { mutate: logout } = useUserLogout();
   const { username, user_balance: userBalance } = data;

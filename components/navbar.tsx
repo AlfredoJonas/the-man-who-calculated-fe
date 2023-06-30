@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Menu, Button } from 'semantic-ui-react';
-import { Router } from 'next/router';
-
 
 /**
  * Props for the Navbar component.
@@ -21,7 +19,7 @@ interface NavbarProps {
  * @param {NavbarProps} props - The component props.
  * @returns {JSX.Element} - The rendered component.
  */
-const Navbar: React.FC<NavbarProps> = ({ email, userBalance, path, onSignOut, push }) => {
+const Navbar: React.FC<NavbarProps> = ({ email, userBalance, path, onSignOut, push }) : JSX.Element => {
   return (
     <NavbarContainer>
       <NavbarItem position="left" onClick={() => push('/')}>

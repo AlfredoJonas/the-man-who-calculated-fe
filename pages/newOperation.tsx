@@ -5,7 +5,7 @@ import { useNewOperation, useOperationsInfo } from '../hooks/queryHooks';
 import Layout from '../components/layout';
 import { AxiosError } from 'axios';
 
-const NewOperation = () => {
+const NewOperation: React.FC = () : JSX.Element => {
   const { data = {} } = useOperationsInfo();
   const [response, setResponse] = useState<ResponseType | null>();
   const [error, setError] = useState<AxiosError | null>();

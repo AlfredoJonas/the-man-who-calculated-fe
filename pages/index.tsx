@@ -10,7 +10,7 @@ import { useDeleteUserRecord, useUserRecordsInfo } from '../hooks/queryHooks';
  *
  * @returns {JSX.Element} - The Home component.
  */
-const Home: React.FC = () => {
+const Home: React.FC = () : JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [orderBy, setOrderBy] = useState<string[]>([]);

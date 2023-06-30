@@ -9,7 +9,7 @@ import { useUserLogin } from '../hooks/queryHooks';
  *
  * @returns {JSX.Element} - The Login component.
  */
-const Login: React.FC = () => {
+const Login: React.FC = () : JSX.Element => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { mutate: doLogin } = useUserLogin();

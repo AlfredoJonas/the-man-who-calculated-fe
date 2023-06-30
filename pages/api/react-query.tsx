@@ -18,7 +18,7 @@ export const queryClient = new QueryClient({
  * Component for providing the React Query client to the application.
  *
  * @param {object} props - The component props.
- * @param {React.ReactNode} props.children - The child components.
+ * @param {React.FC} props.children - The child components.
  * @returns {JSX.Element} - The ReactQueryProvider component.
  */
 interface ReactQueryProviderProps {

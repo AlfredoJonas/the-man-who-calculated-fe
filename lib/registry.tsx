@@ -6,7 +6,7 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
  * Component for managing Styled Components registry on the server side.
  *
  * @param {object} props - The component props.
- * @param {React.ReactNode} props.children - The child components.
+ * @param {React.FC} props.children - The child components.
  * @returns {JSX.Element} - The StyledComponentsRegistry component.
  */
 export default function StyledComponentsRegistry({

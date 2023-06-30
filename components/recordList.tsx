@@ -31,7 +31,7 @@ const RecordList: React.FC<RecordListProps> = memo(({
   handleOrderChange,
   onPageChange,
   onDeleteRecord,
-}) => {
+}) : JSX.Element => {
   /**
    * Determines the icon to display based on the current order.
    *
