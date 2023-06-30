@@ -38,6 +38,7 @@ export const useUserRecordsInfo = (params: paginatedApiUserRecordsProps, options
  */
 export const useUserLogin = (options = {}) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   return useMutation(
     'login',
     async (params: paginatedApiUserLoginProps) => {
@@ -48,8 +49,12 @@ export const useUserLogin = (options = {}) => {
     },
     {
       onSuccess: (data: any) => {
-        api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+        const userToken = `Bearer ${data.token}`
+        api.defaults.headers.common['Authorization'] = userToken;
         localStorage.setItem('logged_in', '1');
+        localStorage.setItem('user_token', userToken);
+        // Invalidate all queries
+        queryClient.invalidateQueries();
         router.push('/');
       },
       ...options,
@@ -77,11 +82,13 @@ export const useUserLogout = (options = {}) => {
       onSuccess: (data: any) => {
         delete api.defaults.headers.common['HTTP_AUTHORIZATION'];
         localStorage.setItem('logged_in', '0');
+        localStorage.setItem('user_token', '');
         router.push('/login');
       },
       onError: () => {
         delete api.defaults.headers.common['HTTP_AUTHORIZATION'];
         localStorage.setItem('logged_in', '0');
+        localStorage.setItem('user_token', '');
         router.push('/login');
       },
       ...options,
