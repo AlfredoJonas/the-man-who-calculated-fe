@@ -136,6 +136,6 @@ Resources I find helpful and would like to give credit to.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: public/images/screenshot.png
 [nextjs]: https://img.shields.io/badge/nextjs-103e2e?style=for-the-badge&logo=nextjs&logoColor=white
 [nextjs-url]: https://nextjs.org/

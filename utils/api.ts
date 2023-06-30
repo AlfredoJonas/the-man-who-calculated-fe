@@ -26,6 +26,7 @@ api.interceptors.response.use(
   response => response,
   error => {
     if (error.response && error.response.status === 401) {
+      delete api.defaults.headers.common['HTTP_AUTHORIZATION'];
       localStorage.setItem('logged_in', '0');
     }
     return Promise.reject(error);

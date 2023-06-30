@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { FETCH_URL, api } from '../utils/api';
 import { ResponseType } from '../types';
 import { paginatedApiUserRecordsProps, paginatedApiUserLoginProps, newOperationProps } from '../types';
@@ -42,12 +42,13 @@ export const useUserLogin = (options = {}) => {
     'login',
     async (params: paginatedApiUserLoginProps) => {
       const {
-        data: { data },
+        data,
       } = await api.post(FETCH_URL.user_login, params);
       return data;
     },
     {
       onSuccess: (data: any) => {
+        api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
         localStorage.setItem('logged_in', '1');
         router.push('/');
       },
@@ -74,10 +75,12 @@ export const useUserLogout = (options = {}) => {
     },
     {
       onSuccess: (data: any) => {
+        delete api.defaults.headers.common['HTTP_AUTHORIZATION'];
         localStorage.setItem('logged_in', '0');
         router.push('/login');
       },
       onError: () => {
+        delete api.defaults.headers.common['HTTP_AUTHORIZATION'];
         localStorage.setItem('logged_in', '0');
         router.push('/login');
       },
