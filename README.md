@@ -20,7 +20,6 @@
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
   </p>
-  <p><span><b>Username: </b>manager@truenorth.com</span>  <span><b>Password: </b>admin</span></p>
 </div>
 
 
