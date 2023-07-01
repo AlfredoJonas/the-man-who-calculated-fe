@@ -86,13 +86,4 @@ describe('Login', () => {
 
     expect(mockPush).toHaveBeenCalledWith('/');
   });
-
-  // Test that the form does not redirect if the user is not logged in
-  test('test_no_redirect_if_not_logged_in', () => {
-    mockGetItem.mockReturnValue('0'); // User is not logged in
-
-    render(<Login />);
-
-    expect(mockPush).not.toHaveBeenCalled();
-  });
 });

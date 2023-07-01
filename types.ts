@@ -16,7 +16,7 @@ export interface OperationFields {
 }
 
 export interface Operation {
-  id: string;
+  id: number;
   type: string;
   cost: number;
   fields: Record<string, OperationFields>;
@@ -36,7 +36,7 @@ export interface paginatedApiUserLoginProps {
 }
 
 export interface newOperationProps {
-  operation_id: string;
+  operation_id: number;
   variables: string;
 }
 

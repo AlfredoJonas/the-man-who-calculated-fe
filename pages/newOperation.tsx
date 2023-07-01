@@ -65,6 +65,7 @@ const NewOperation: React.FC = () : JSX.Element => {
             <label>{key} {value.type}</label>
             <input
               type="number"
+              placeholder={`${value.type} ${key}`}
               value={value.value}
               onChange={(e) => onFieldChange(e.target.value, key)}
               required={value.required}

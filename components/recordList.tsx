@@ -66,7 +66,7 @@ const RecordList: React.FC<RecordListProps> = memo(({
         </Table.Row>
       </Table.Header>
 
-      <Table.Body>
+      <Table.Body data-testid="record-list">
         {records &&
           records.length > 0 &&
           records.map((record: UserRecord) => (
@@ -75,7 +75,7 @@ const RecordList: React.FC<RecordListProps> = memo(({
                 <Table.Cell key={`${record.id}-${key}`}>{record[key]}</Table.Cell>
               ))}
               <Table.Cell>
-                <StyledIcon name="trash" color='red' onClick={() => onDeleteRecord(record.id)} />
+                <StyledIcon data-testid="delete" name="trash" color='red' onClick={() => onDeleteRecord(record.id)} />
               </Table.Cell>
             </Table.Row>
           ))}

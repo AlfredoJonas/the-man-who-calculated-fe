@@ -9,7 +9,7 @@ import withAuthRedirect from '../hooks/auth';
  *
  * @returns {JSX.Element} - The Login component.
  */
-const Login = (): JSX.Element => {
+const Login: React.FC = (): JSX.Element => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { mutate: doLogin } = useUserLogin();
