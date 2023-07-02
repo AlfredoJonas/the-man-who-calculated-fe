@@ -55,7 +55,7 @@ const NewOperation: React.FC = () : JSX.Element => {
             placeholder="Select Operation"
             required
             selection
-            options={operations.map((op: Operation) => ({ key: op.id, value: op.type, text: op.type }))}
+            options={operations.map((op: Operation) => ({ key: op.id, value: op.type, text: `${op.type} (cost: ${op.cost})` }))}
             value={operation}
             onChange={onChangeOperation}
           />

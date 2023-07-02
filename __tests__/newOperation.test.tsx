@@ -65,7 +65,7 @@ describe('NewOperation', () => {
 
   test('fires newOperation on form submission', async () => {
     const { getByText, getByPlaceholderText } = render(<NewOperation />);
-    const operationItem = getByText('addition');
+    const operationItem = getByText('addition (cost: 0.2)');
     const calculateButton = getByText('Calculate') as HTMLButtonElement;
     fireEvent.click(operationItem);
 
