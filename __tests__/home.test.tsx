@@ -1,5 +1,10 @@
 import React from 'react';
-import { render, fireEvent, waitFor, getAllByTestId } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  getAllByTestId,
+} from '@testing-library/react';
 import Home from '../pages';
 import { useDeleteUserRecord, useUserRecordsInfo } from '../hooks/queryHooks';
 import { paginatedApiUserRecordsProps } from '../types';
@@ -8,25 +13,25 @@ const mockDoLogout = jest.fn();
 
 // Mock the queryHooks
 jest.mock('../hooks/queryHooks', () => ({
-    useUserInfo: () => ({
-        data: { data: {username: 'test@test.com', balanace: 1000}},
-    }),
-    useUserLogout: () => ({
-        mutate: mockDoLogout,
-    }),
-    useDeleteUserRecord: jest.fn().mockReturnValue({ mutate: jest.fn() }),
-    useUserRecordsInfo: jest.fn().mockReturnValue({
-        data: {
-            data: [
-                // sample records data
-                { id: 1, name: 'Record 1' },
-                { id: 2, name: 'Record 2' },
-                { id: 3, name: 'Record 3' },
-            ],
-            total_pages: 3,
-            },
-            refetch: jest.fn(),
-    }),
+  useUserInfo: () => ({
+    data: { data: { username: 'test@test.com', balanace: 1000 } },
+  }),
+  useUserLogout: () => ({
+    mutate: mockDoLogout,
+  }),
+  useDeleteUserRecord: jest.fn().mockReturnValue({ mutate: jest.fn() }),
+  useUserRecordsInfo: jest.fn().mockReturnValue({
+    data: {
+      data: [
+        // sample records data
+        { id: 1, name: 'Record 1' },
+        { id: 2, name: 'Record 2' },
+        { id: 3, name: 'Record 3' },
+      ],
+      total_pages: 3,
+    },
+    refetch: jest.fn(),
+  }),
 }));
 
 // Mock the router
@@ -51,7 +56,9 @@ describe.only('Home', () => {
     fireEvent.click(orderButton);
 
     await waitFor(() => {
-      expect(useUserRecordsInfo({} as paginatedApiUserRecordsProps).refetch).toHaveBeenCalled();
+      expect(
+        useUserRecordsInfo({} as paginatedApiUserRecordsProps).refetch,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -65,5 +72,4 @@ describe.only('Home', () => {
       expect(useDeleteUserRecord().mutate).toHaveBeenCalled();
     });
   });
-
 });

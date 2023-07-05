@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Navbar from './navbar';
@@ -17,7 +17,7 @@ const siteTitle = 'True North Home Task Challenge';
 
 /**
  * Layout component for the application.
- * 
+ *
  * @param {LayoutProps} props - The component props.
  * @returns {JSX.Element} - The rendered component.
  */
@@ -33,10 +33,10 @@ const Layout: React.FC<LayoutProps> = ({ children }): JSX.Element => {
     const loggedIn = localStorage.getItem('logged_in');
     if (loggedIn === '0') {
       router.push('/login');
-      return <StyledContainer>Loading...</StyledContainer>
+      return <StyledContainer>Loading...</StyledContainer>;
     }
   } else {
-    return <StyledContainer>Loading...</StyledContainer>
+    return <StyledContainer>Loading...</StyledContainer>;
   }
 
   return (
@@ -46,7 +46,13 @@ const Layout: React.FC<LayoutProps> = ({ children }): JSX.Element => {
         <meta name="og:title" content={siteTitle} />
       </Head>
       <StyledHeader>
-        <Navbar email={username} userBalance={userBalance} path={router.asPath} push={(url) => router.push(url)} onSignOut={logout} />
+        <Navbar
+          email={username}
+          userBalance={userBalance}
+          path={router.asPath}
+          push={(url) => router.push(url)}
+          onSignOut={logout}
+        />
       </StyledHeader>
       <StyledMain>{children}</StyledMain>
     </StyledContainer>

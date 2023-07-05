@@ -25,11 +25,11 @@ interface ReactQueryProviderProps {
   children: ReactNode;
 }
 
-const ReactQueryProvider: React.FC<ReactQueryProviderProps> = ({ children }) => {
+const ReactQueryProvider: React.FC<ReactQueryProviderProps> = ({
+  children,
+}) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

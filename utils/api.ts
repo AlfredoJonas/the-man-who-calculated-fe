@@ -3,7 +3,7 @@ import { APP_BASE_URL } from './constant';
 
 const headers: {
   'Content-Type': string;
-  'Authorization'?: string;
+  Authorization?: string;
 } = {
   'Content-Type': 'application/json',
 };
@@ -22,8 +22,8 @@ export const FETCH_URL = {
   user_info: 'user',
   delete_user_record: 'record/delete',
   operations: 'operations',
-  new_operation: 'record'
-}
+  new_operation: 'record',
+};
 
 export const api = axios.create({
   baseURL: APP_BASE_URL,
@@ -33,13 +33,13 @@ export const api = axios.create({
 });
 
 api.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     if (error.response && error.response.status === 401) {
       delete api.defaults.headers.common['HTTP_AUTHORIZATION'];
       localStorage.setItem('logged_in', '0');
       localStorage.setItem('user_token', '');
     }
     return Promise.reject(error);
-  }
+  },
 );

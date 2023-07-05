@@ -1,6 +1,12 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
-import { Table, Pagination, PaginationProps, Icon, SemanticICONS } from 'semantic-ui-react';
+import {
+  Table,
+  Pagination,
+  PaginationProps,
+  Icon,
+  SemanticICONS,
+} from 'semantic-ui-react';
 import { UserRecord } from '../types';
 import { recordKeyValues } from '../utils/constant';
 
@@ -23,79 +29,90 @@ interface RecordListProps {
  * @param {RecordListProps} props - The component props.
  * @returns {JSX.Element} - The rendered component.
  */
-const RecordList: React.FC<RecordListProps> = memo(({
-  records,
-  orderBy,
-  currentPage,
-  totalPages,
-  handleOrderChange,
-  onPageChange,
-  onDeleteRecord,
-}) : JSX.Element => {
-  /**
-   * Determines the icon to display based on the current order.
-   *
-   * @param {string} key - The key of the column.
-   * @returns {SemanticICONS | undefined} - The icon name.
-   */
-  const checkOrderIcon = (key: string): SemanticICONS | undefined => {
-    if (orderBy.includes(key)) {
-      return "arrow up";
-    } else if (orderBy.includes(`-${key}`)) {
-      return "arrow down";
-    } else {
-      return "arrows alternate vertical";
-    }
-  };
+const RecordList: React.FC<RecordListProps> = memo(
+  ({
+    records,
+    orderBy,
+    currentPage,
+    totalPages,
+    handleOrderChange,
+    onPageChange,
+    onDeleteRecord,
+  }): JSX.Element => {
+    /**
+     * Determines the icon to display based on the current order.
+     *
+     * @param {string} key - The key of the column.
+     * @returns {SemanticICONS | undefined} - The icon name.
+     */
+    const checkOrderIcon = (key: string): SemanticICONS | undefined => {
+      if (orderBy.includes(key)) {
+        return 'arrow up';
+      } else if (orderBy.includes(`-${key}`)) {
+        return 'arrow down';
+      } else {
+        return 'arrows alternate vertical';
+      }
+    };
 
-  return (
-    <StyledTable celled stackable>
-      <Table.Header>
-        <Table.Row>
-          {recordKeyValues.map(({ key, value }) => (
-            <StyledHeaderCell onClick={() => handleOrderChange(key)} key={key}>
-              <span>
-                {value}
-                <Icon name={checkOrderIcon(key)} />
-              </span>
-            </StyledHeaderCell>
-          ))}
-          <Table.HeaderCell>
-            <span>Action</span>
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+    return (
+      <StyledTable celled stackable>
+        <Table.Header>
+          <Table.Row>
+            {recordKeyValues.map(({ key, value }) => (
+              <StyledHeaderCell
+                onClick={() => handleOrderChange(key)}
+                key={key}
+              >
+                <span>
+                  {value}
+                  <Icon name={checkOrderIcon(key)} />
+                </span>
+              </StyledHeaderCell>
+            ))}
+            <Table.HeaderCell>
+              <span>Action</span>
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
 
-      <Table.Body data-testid="record-list">
-        {records &&
-          records.length > 0 &&
-          records.map((record: UserRecord) => (
-            <Table.Row key={record.id}>
-              {recordKeyValues.map(({ key }) => (
-                <Table.Cell key={`${record.id}-${key}`}>{record[key]}</Table.Cell>
-              ))}
-              <Table.Cell>
-                <StyledIcon data-testid="delete" name="trash" color='red' onClick={() => onDeleteRecord(record.id)} />
-              </Table.Cell>
-            </Table.Row>
-          ))}
-      </Table.Body>
+        <Table.Body data-testid="record-list">
+          {records &&
+            records.length > 0 &&
+            records.map((record: UserRecord) => (
+              <Table.Row key={record.id}>
+                {recordKeyValues.map(({ key }) => (
+                  <Table.Cell key={`${record.id}-${key}`}>
+                    {record[key]}
+                  </Table.Cell>
+                ))}
+                <Table.Cell>
+                  <StyledIcon
+                    data-testid="delete"
+                    name="trash"
+                    color="red"
+                    onClick={() => onDeleteRecord(record.id)}
+                  />
+                </Table.Cell>
+              </Table.Row>
+            ))}
+        </Table.Body>
 
-      <Table.Footer>
-        <Table.Row>
-          <Table.HeaderCell colSpan={7}>
-            <Pagination
-              activePage={currentPage}
-              totalPages={totalPages}
-              onPageChange={onPageChange}
-            />
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Footer>
-    </StyledTable>
-  );
-});
-
+        <Table.Footer>
+          <Table.Row>
+            <Table.HeaderCell colSpan={7}>
+              <Pagination
+                activePage={currentPage}
+                totalPages={totalPages}
+                onPageChange={onPageChange}
+              />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Footer>
+      </StyledTable>
+    );
+  },
+);
 
 /**
  * Styled component for the table.
@@ -122,7 +139,7 @@ const StyledTable = styled(Table)`
  * Styled component for the header cell.
  */
 const StyledHeaderCell = styled(Table.HeaderCell)`
-  &&&{
+  &&& {
     cursor: pointer;
   }
 `;
@@ -131,10 +148,9 @@ const StyledHeaderCell = styled(Table.HeaderCell)`
  * Styled component for the icon.
  */
 const StyledIcon = styled(Icon)`
-  &&&{
+  &&& {
     cursor: pointer;
   }
 `;
-
 
 export default RecordList;

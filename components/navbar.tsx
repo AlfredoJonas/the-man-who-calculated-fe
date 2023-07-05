@@ -15,11 +15,17 @@ interface NavbarProps {
 
 /**
  * Navbar component for the application.
- * 
+ *
  * @param {NavbarProps} props - The component props.
  * @returns {JSX.Element} - The rendered component.
  */
-const Navbar: React.FC<NavbarProps> = ({ email, userBalance, path, onSignOut, push }) : JSX.Element => {
+const Navbar: React.FC<NavbarProps> = ({
+  email,
+  userBalance,
+  path,
+  onSignOut,
+  push,
+}): JSX.Element => {
   return (
     <NavbarContainer>
       <NavbarItem position="left" onClick={() => push('/')}>
@@ -29,18 +35,15 @@ const Navbar: React.FC<NavbarProps> = ({ email, userBalance, path, onSignOut, pu
         <LeftItemText>Balance {userBalance}</LeftItemText>
       </NavbarItem>
       <NavbarItem position="right">
-        {
-          path === '/newOperation' ? (
-            <StyledButton onClick={() => push('/')} color="black">
-              Back to all operations
-            </StyledButton>
-          ) : (
+        {path === '/newOperation' ? (
+          <StyledButton onClick={() => push('/')} color="black">
+            Back to all operations
+          </StyledButton>
+        ) : (
           <Button onClick={() => push('newOperation')} color="green">
             New operation
           </Button>
-          )
-        }
-        
+        )}
       </NavbarItem>
       <NavbarItem position="right">
         <StyledButton onClick={onSignOut} color="red" size="tiny">
@@ -50,7 +53,6 @@ const Navbar: React.FC<NavbarProps> = ({ email, userBalance, path, onSignOut, pu
     </NavbarContainer>
   );
 };
-
 
 /**
  * Styled component for the Navbar container.

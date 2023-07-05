@@ -1,4 +1,9 @@
-import { render, fireEvent, waitFor, getByPlaceholderText } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  getByPlaceholderText,
+} from '@testing-library/react';
 import { paginatedApiUserLoginProps } from '../types';
 import Login from '../pages/login';
 
@@ -18,7 +23,6 @@ const mockRemoveItem = jest.fn();
 const mockClear = jest.fn();
 const mockLength = 0;
 const mockKey = jest.fn();
-
 
 Object.defineProperty(window, 'localStorage', {
   value: {
@@ -41,7 +45,6 @@ jest.mock('next/router', () => ({
 }));
 
 describe('Login', () => {
-
   beforeEach(() => {
     jest.clearAllMocks();
   });

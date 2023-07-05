@@ -11,7 +11,7 @@ import { useDeleteUserRecord, useUserRecordsInfo } from '../hooks/queryHooks';
  * @returns {JSX.Element} - The Home component.
  */
 // build tests for this component using jest and react testing library
-const Home = () : JSX.Element => {
+const Home = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [orderBy, setOrderBy] = useState<string[]>([]);
@@ -67,7 +67,7 @@ const Home = () : JSX.Element => {
    */
   const handlePageChange = (
     _: React.MouseEvent,
-    { activePage }: PaginationProps
+    { activePage }: PaginationProps,
   ) => {
     setCurrentPage(activePage as number);
   };

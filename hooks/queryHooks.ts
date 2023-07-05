@@ -3,7 +3,11 @@ import { useRouter } from 'next/router';
 import axios, { AxiosError } from 'axios';
 import { FETCH_URL, api } from '../utils/api';
 import { ResponseType } from '../types';
-import { paginatedApiUserRecordsProps, paginatedApiUserLoginProps, newOperationProps } from '../types';
+import {
+  paginatedApiUserRecordsProps,
+  paginatedApiUserLoginProps,
+  newOperationProps,
+} from '../types';
 
 /**
  * Custom hook for fetching user records information.
@@ -12,7 +16,10 @@ import { paginatedApiUserRecordsProps, paginatedApiUserLoginProps, newOperationP
  * @param {object} options - The query options.
  * @returns {object} - The query result.
  */
-export const useUserRecordsInfo = (params: paginatedApiUserRecordsProps, options = {}) => {
+export const useUserRecordsInfo = (
+  params: paginatedApiUserRecordsProps,
+  options = {},
+) => {
   const queryClient = useQueryClient();
   return useQuery(
     'records',
@@ -26,7 +33,7 @@ export const useUserRecordsInfo = (params: paginatedApiUserRecordsProps, options
       },
       placeholderData: queryClient.getQueryData(`records`) || {},
       ...options,
-    }
+    },
   );
 };
 
@@ -42,14 +49,12 @@ export const useUserLogin = (options = {}) => {
   return useMutation(
     'login',
     async (params: paginatedApiUserLoginProps) => {
-      const {
-        data,
-      } = await api.post(FETCH_URL.user_login, params);
+      const { data } = await api.post(FETCH_URL.user_login, params);
       return data;
     },
     {
       onSuccess: (data: any) => {
-        const userToken = `Bearer ${data.token}`
+        const userToken = `Bearer ${data.token}`;
         api.defaults.headers.common['Authorization'] = userToken;
         localStorage.setItem('logged_in', '1');
         localStorage.setItem('user_token', userToken);
@@ -58,7 +63,7 @@ export const useUserLogin = (options = {}) => {
         router.push('/');
       },
       ...options,
-    }
+    },
   );
 };
 
@@ -92,7 +97,7 @@ export const useUserLogout = (options = {}) => {
         router.push('/login');
       },
       ...options,
-    }
+    },
   );
 };
 
@@ -113,7 +118,7 @@ export const useUserInfo = (options = {}) => {
     {
       placeholderData: queryClient.getQueryData('user') || {},
       ...options,
-    }
+    },
   );
 };
 
@@ -158,7 +163,7 @@ export const useDeleteUserRecord = (options = {}) => {
         queryClient.invalidateQueries('records');
       },
       ...options,
-    }
+    },
   );
 };
 
@@ -179,10 +184,9 @@ export const useOperationsInfo = (options = {}) => {
     {
       placeholderData: queryClient.getQueryData('operations') || {},
       ...options,
-    }
+    },
   );
 };
-
 
 /**
  * Custom hook for new user operation.
@@ -190,7 +194,11 @@ export const useOperationsInfo = (options = {}) => {
  * @param {object} options - The mutation options.
  * @returns {object} - The mutation result.
  */
-export const useNewOperation = (setResponse: (response: ResponseType | null)=>void, setError: (error: AxiosError | null)=>void, options = {}) => {
+export const useNewOperation = (
+  setResponse: (response: ResponseType | null) => void,
+  setError: (error: AxiosError | null) => void,
+  options = {},
+) => {
   const queryClient = useQueryClient();
   return useMutation(
     'newOperation',
@@ -211,6 +219,6 @@ export const useNewOperation = (setResponse: (response: ResponseType | null)=>vo
         setError(e as AxiosError);
       },
       ...options,
-    }
+    },
   );
 };
